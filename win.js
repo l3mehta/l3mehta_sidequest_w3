@@ -22,7 +22,7 @@ function drawWin() {
 
   // Main success message
   textSize(40);
-  text("You Win!", width / 2, 300);
+  text("Great Job! Everyone loved that song!", width / 2, 300);
 
   // Instruction text
   textSize(20);

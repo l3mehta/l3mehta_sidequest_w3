@@ -16,26 +16,31 @@ function drawStart() {
 
   // ---- Title text ----
   fill(30, 50, 60);
-  textSize(46);
+  textSize(44);
   textAlign(CENTER, CENTER);
-  text("Win or Lose", width / 2, 180);
+  text("Morning Radio Host", width / 2, 170);
+
+  // ---- Subtitle ----
+  textSize(20);
+  text(
+    "Click START SHOW to begin.\nChoose songs that listeners will like!",
+    width / 2,
+    240,
+  );
 
   // ---- Buttons (data only) ----
-  // These objects store the position/size/label for each button.
-  // Using objects makes it easy to pass them into drawButton()
-  // and also reuse the same information for hover checks.
   const startBtn = {
     x: width / 2,
-    y: 320,
-    w: 240,
+    y: 340,
+    w: 260,
     h: 80,
-    label: "START",
+    label: "START SHOW",
   };
 
   const instrBtn = {
     x: width / 2,
-    y: 430,
-    w: 240,
+    y: 450,
+    w: 260,
     h: 80,
     label: "INSTRUCTIONS",
   };
@@ -45,8 +50,6 @@ function drawStart() {
   drawButton(instrBtn);
 
   // ---- Cursor feedback ----
-  // If the mouse is over either button, show a hand cursor
-  // so the player knows it is clickable.
   const over = isHover(startBtn) || isHover(instrBtn);
   cursor(over ? HAND : ARROW);
 }
@@ -56,13 +59,14 @@ function drawStart() {
 // ------------------------------------------------------------
 // Called from main.js only when currentScreen === "start"
 function startMousePressed() {
-  // For input checks, we only need x,y,w,h (label is optional)
-  const startBtn = { x: width / 2, y: 320, w: 240, h: 80 };
-  const instrBtn = { x: width / 2, y: 430, w: 240, h: 80 };
+  const startBtn = { x: width / 2, y: 340, w: 260, h: 80 };
+  const instrBtn = { x: width / 2, y: 450, w: 260, h: 80 };
 
-  // If START is clicked, go to the game screen
+  // If START SHOW is clicked, randomize song screen then go to song1
   if (isHover(startBtn)) {
-    currentScreen = "game";
+    window.resultMessage = ""; // clear last run's message (optional)
+    setupSong1(); // 🔀 randomize songs + outcomes each run
+    currentScreen = "song1";
   }
   // If INSTRUCTIONS is clicked, go to the instructions screen
   else if (isHover(instrBtn)) {
@@ -73,12 +77,11 @@ function startMousePressed() {
 // ------------------------------------------------------------
 // Keyboard input for the start screen
 // ------------------------------------------------------------
-// Provides keyboard shortcuts:
-// - ENTER starts the game
-// - I opens instructions
 function startKeyPressed() {
   if (keyCode === ENTER) {
-    currentScreen = "game";
+    window.resultMessage = "";
+    setupSong1(); // 🔀 randomize songs + outcomes each run
+    currentScreen = "song1";
   }
 
   if (key === "i" || key === "I") {
@@ -89,49 +92,29 @@ function startKeyPressed() {
 // ------------------------------------------------------------
 // Helper: drawButton()
 // ------------------------------------------------------------
-// This function draws a button and changes its appearance on hover.
-// It does NOT decide what happens when you click the button.
-// That logic lives in startMousePressed() above.
-//
-// Keeping drawing separate from input/logic makes code easier to read.
 function drawButton({ x, y, w, h, label }) {
   rectMode(CENTER);
 
-  // Check if the mouse is over the button rectangle
   const hover = isHover({ x, y, w, h });
 
   noStroke();
 
-  // ---- Visual feedback (hover vs not hover) ----
-  // This is a common UI idea:
-  // - normal state is calmer
-  // - hover state is brighter + more “active”
-  //
-  // We also add a shadow using drawingContext (p5 lets you access the
-  // underlying canvas context for effects like shadows).
   if (hover) {
-    fill(255, 200, 150, 220); // warm coral on hover
-
-    // Shadow settings (only when hovered)
+    fill(255, 200, 150, 220);
     drawingContext.shadowBlur = 20;
     drawingContext.shadowColor = color(255, 180, 120);
   } else {
-    fill(255, 240, 210, 210); // soft cream base
-
-    // Softer shadow when not hovered
+    fill(255, 240, 210, 210);
     drawingContext.shadowBlur = 8;
     drawingContext.shadowColor = color(220, 220, 220);
   }
 
-  // Draw the rounded rectangle button
   rect(x, y, w, h, 14);
 
-  // Important: reset shadow so it does not affect other drawings
   drawingContext.shadowBlur = 0;
 
-  // Draw the label text on top of the button
   fill(40, 60, 70);
-  textSize(28);
+  textSize(26);
   textAlign(CENTER, CENTER);
   text(label, x, y);
 }

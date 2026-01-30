@@ -21,7 +21,7 @@
 //
 // We store the “name” of the current screen as a string.
 // Only one screen should be active at a time.
-let currentScreen = "start"; // "start" | "instr" | "game" | "win" | "lose"
+let currentScreen = "start"; // "start" | "instr" | "song1" | "game" | "win" | "lose"
 
 // ------------------------------
 // setup() runs ONCE at the beginning
@@ -44,12 +44,14 @@ function draw() {
   // Each screen file defines its own draw function:
   //   start.js         → drawStart()
   //   instructions.js  → drawInstr()
+  //   song1.js         → drawSong1()
   //   game.js          → drawGame()
   //   win.js           → drawWin()
   //   lose.js          → drawLose()
 
   if (currentScreen === "start") drawStart();
   else if (currentScreen === "instr") drawInstr();
+  else if (currentScreen === "song1") drawSong1();
   else if (currentScreen === "game") drawGame();
   else if (currentScreen === "win") drawWin();
   else if (currentScreen === "lose") drawLose();
@@ -69,12 +71,14 @@ function mousePressed() {
   // Each screen *may* define a mouse handler:
   // start.js         → startMousePressed()
   // instructions.js  → instrMousePressed()
+  // song1.js         → song1MousePressed()
   // game.js          → gameMousePressed()
   // win.js           → winMousePressed()
   // lose.js          → loseMousePressed()
 
   if (currentScreen === "start") startMousePressed();
   else if (currentScreen === "instr") instrMousePressed();
+  else if (currentScreen === "song1") song1MousePressed?.();
   else if (currentScreen === "game") gameMousePressed();
   // The ?.() means “call this function only if it exists”
   // This prevents errors if a screen doesn’t implement a handler.
@@ -90,12 +94,14 @@ function keyPressed() {
   // Each screen *may* define a key handler:
   // start.js         → startKeyPressed()
   // instructions.js  → instrKeyPressed()
+  // song1.js         → song1KeyPressed()
   // game.js          → gameKeyPressed()
   // win.js           → winKeyPressed()
   // lose.js          → loseKeyPressed()
 
   if (currentScreen === "start") startKeyPressed();
   else if (currentScreen === "instr") instrKeyPressed();
+  else if (currentScreen === "song1") song1KeyPressed?.();
   else if (currentScreen === "game") gameKeyPressed?.();
   else if (currentScreen === "win") winKeyPressed?.();
   else if (currentScreen === "lose") loseKeyPressed?.();

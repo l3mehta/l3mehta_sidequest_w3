@@ -18,7 +18,7 @@ function drawLose() {
 
   // Main message
   textSize(40);
-  text("You Lose!", width / 2, 300);
+  text("Oh No! They didn't like that song :(", width / 2, 300);
 
   // Instruction text
   textSize(20);
