@@ -1,28 +1,20 @@
 ## Project Title
 
-GBDA302 Week 3 Example 1: Instructions Screen with Back button
+GBDA302 Week 3 Side Quest: Picking a Song
 
 ---
 
 ## Authors
 
-Karen Cochrane and David Han
+Liza Mehta
+l3mehta
+21080966
 
 ---
 
 ## Description
 
-This p5.js project demonstrates a simple multi-screen game structure using a state-based approach. The example includes a start screen, an instructions screen with a back button, a basic game screen, and win/lose outcome screens. The focus is on showing how to separate screens into different files, route input based on the current game state, and design simple UI elements such as buttons and keyboard controls.
-
----
-
-## Learning Goals
-
-- Understand how to manage multiple game states using a shared currentScreen variable
-- Practice separating code across multiple files for readability and maintenance
-- Implement clickable and keyboard-accessible UI buttons
-- Learn how to route draw(), mousePressed(), and keyPressed() logic based on the active screen
-- Build a basic instructions screen with a functional back button
+This p5.js project uses multi screen method discussed in class. The goal of the game is to select asong you thing an audience would enjoy in your role as a radio host. Whether or not you win, depends on if the audience enjoyed the music.
 
 ---
 
@@ -32,8 +24,23 @@ N/A
 
 ---
 
+## Iteration Notes
+
+Post Play Test:
+
+- Randomize the songs that are generated
+- Randomize which options will result in a win / lose
+- Include a final message for the win / lose screen
+
+Post Showcase:
+
+- Use real music to make the experience more immersive
+- Include more graphics
+
+---
+
 ## GenAI
 
-The code was written by Dr. Karen Cochrane but she used GenAI to write the comments.
+ChatGPT was used to help write the code and comments. Liza made sure to use extensive iteration for each prompt.
 
 ---
